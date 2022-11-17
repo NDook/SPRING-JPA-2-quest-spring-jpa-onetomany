@@ -6,6 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Date;
 
+import javax.persistence.*;
+import java.util.List;
+
+
 @Entity
 public class Wizard {
 
@@ -18,6 +22,12 @@ public class Wizard {
     private String birthPlace;
     private String biography;
     private boolean muggle;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, optional = false)
+    @JoinColumn(name = "school_id", nullable = false)
+    
+
+    private School school;
 
     public Wizard() {
     }
@@ -76,5 +86,13 @@ public class Wizard {
 
     public void setMuggle(boolean muggle) {
         this.muggle = muggle;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
     }
 }
